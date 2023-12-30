@@ -1,10 +1,7 @@
 import 'package:agriconnect/services/services_constants.dart';
 import 'package:agriconnect/views/admin/attendance/admin_attendance_edit_view.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:iconly/iconly.dart';
 
 class AdminUserAttendanceView extends StatefulWidget {
   const AdminUserAttendanceView({super.key});
@@ -32,7 +29,6 @@ class _AdminUserAttendanceViewState extends State<AdminUserAttendanceView> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, snapshot, animation, index) {
                   if (snapshot.value != null) {
-                    print(snapshot.value);
                     final email = snapshot.child('email').value;
                     final timeStamp = snapshot.child('Timestamp').value;
                     final uid = snapshot.child('id').value;
