@@ -1,14 +1,7 @@
-// import 'package:agriconnect/services/services_constants.dart';
-// import 'package:agriconnect/widgets/custom_textform_field.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:firebase_database/firebase_database.dart';
-// import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:agriconnect/services/services_constants.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:iconly/iconly.dart';
 
-// import '../../../utils/utils.dart';
-// import '../../../widgets/custom_btn.dart';
 import '../widgets/custom_table_widget.dart';
 
 class AdminAttendanceEditView extends StatefulWidget {
@@ -40,8 +33,6 @@ class _AdminAttendanceEditViewState extends State<AdminAttendanceEditView> {
 
   @override
   Widget build(BuildContext context) {
-    // final users = FirebaseDatabase.instance.ref('users');
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -58,32 +49,16 @@ class _AdminAttendanceEditViewState extends State<AdminAttendanceEditView> {
               ),
               children: [
                 customTableWidget(
-                  headingText: "First Name",
-                  dataText: widget.data["firstName"],
-                ),
-                customTableWidget(
-                  headingText: "Last Name",
-                  dataText: widget.data["lastName"],
-                ),
-                customTableWidget(
                   headingText: "Email",
                   dataText: widget.data["email"],
-                ),
-                customTableWidget(
-                  headingText: "Department",
-                  dataText: widget.data["department"],
-                ),
-                customTableWidget(
-                  headingText: "Semester",
-                  dataText: widget.data["semester"],
                 ),
                 customTableWidget(
                   headingText: "Attendance",
                   dataText: "Present",
                 ),
-                TableRow(
+                const TableRow(
                   children: [
-                    const TableCell(
+                    TableCell(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text("Role"),
@@ -91,8 +66,8 @@ class _AdminAttendanceEditViewState extends State<AdminAttendanceEditView> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.data["role"]),
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Student"),
                       ),
                     ),
                   ],

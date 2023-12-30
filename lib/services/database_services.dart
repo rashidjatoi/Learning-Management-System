@@ -112,12 +112,10 @@ class DatabaseServices {
 
   // Save users data to the database
   static Future uploadAttendance({email, id}) async {
-    final uid = DateTime.now().millisecondsSinceEpoch;
-
     try {
-      await firebaseDatabase.child(id.toString()).child("attendance").set({
+      await attendaceDatabase.child(id.toString()).set({
         "email": email,
-        "id": uid.toString(),
+        "id": id.toString(),
         "Timestamp": DateTime.now().toString(),
       });
     } catch (e) {

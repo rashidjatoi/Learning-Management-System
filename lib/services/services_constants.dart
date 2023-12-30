@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 final firebaseAuth = FirebaseAuth.instance;
 final user = firebaseAuth.currentUser;
 final firebaseDatabase = FirebaseDatabase.instance.ref('users');
+final attendaceDatabase = FirebaseDatabase.instance.ref('attendance');
 
 final databaseRef = FirebaseDatabase.instance.ref(user.toString());
 

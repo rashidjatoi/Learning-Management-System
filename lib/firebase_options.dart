@@ -44,41 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCLd-aAGs5Bms_i2vYqkk28UoY3H8lNCmM',
-    appId: '1:588083323518:web:a5f39f5fc481bba19aee2f',
-    messagingSenderId: '588083323518',
-    projectId: 'agriculture-lms-ecc73',
-    authDomain: 'agriculture-lms-ecc73.firebaseapp.com',
-    databaseURL: 'https://agriculture-lms-ecc73-default-rtdb.firebaseio.com',
-    storageBucket: 'agriculture-lms-ecc73.appspot.com',
+    apiKey: 'AIzaSyA1Oms4gTfMQVLLvJbvv8vCLIqQLd787w8',
+    appId: '1:834130946589:web:fcb15806ffb2a54aa8b4f4',
+    messagingSenderId: '834130946589',
+    projectId: 'learning-management-syst-b774b',
+    authDomain: 'learning-management-syst-b774b.firebaseapp.com',
+    storageBucket: 'learning-management-syst-b774b.appspot.com',
+    measurementId: 'G-9QNRJC40S6',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBUbm5LntNivRj7ItuErxxP8docE-tI4Is',
-    appId: '1:588083323518:android:afd840227f5e69af9aee2f',
-    messagingSenderId: '588083323518',
-    projectId: 'agriculture-lms-ecc73',
-    databaseURL: 'https://agriculture-lms-ecc73-default-rtdb.firebaseio.com',
-    storageBucket: 'agriculture-lms-ecc73.appspot.com',
+    apiKey: 'AIzaSyB97MZ980hXyCLUH9YRQqlRQ424t6sQcWw',
+    appId: '1:834130946589:android:fc4d7dc3d280cca9a8b4f4',
+    messagingSenderId: '834130946589',
+    projectId: 'learning-management-syst-b774b',
+    storageBucket: 'learning-management-syst-b774b.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBzdpwk6yxHpe3Yqe8PKEP6StOBogn2GKw',
-    appId: '1:588083323518:ios:040f2ab635d3c5579aee2f',
-    messagingSenderId: '588083323518',
-    projectId: 'agriculture-lms-ecc73',
-    databaseURL: 'https://agriculture-lms-ecc73-default-rtdb.firebaseio.com',
-    storageBucket: 'agriculture-lms-ecc73.appspot.com',
+    apiKey: 'AIzaSyCzju98JO_lC4W9HyQwyE3Fd4uz-c3QLug',
+    appId: '1:834130946589:ios:8967421e7b2fafdca8b4f4',
+    messagingSenderId: '834130946589',
+    projectId: 'learning-management-syst-b774b',
+    storageBucket: 'learning-management-syst-b774b.appspot.com',
     iosBundleId: 'com.example.agriconnect',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBzdpwk6yxHpe3Yqe8PKEP6StOBogn2GKw',
-    appId: '1:588083323518:ios:cbc8b9070e42b4699aee2f',
-    messagingSenderId: '588083323518',
-    projectId: 'agriculture-lms-ecc73',
-    databaseURL: 'https://agriculture-lms-ecc73-default-rtdb.firebaseio.com',
-    storageBucket: 'agriculture-lms-ecc73.appspot.com',
+    apiKey: 'AIzaSyCzju98JO_lC4W9HyQwyE3Fd4uz-c3QLug',
+    appId: '1:834130946589:ios:b9853b405d716088a8b4f4',
+    messagingSenderId: '834130946589',
+    projectId: 'learning-management-syst-b774b',
+    storageBucket: 'learning-management-syst-b774b.appspot.com',
     iosBundleId: 'com.example.agriconnect.RunnerTests',
   );
 }
