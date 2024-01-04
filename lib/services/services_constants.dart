@@ -21,3 +21,17 @@ const userUid = "o6m4ZdAPFRc9XvkbhrcpBAAamgh2";
 
 final storage = FirebaseStorage.instance;
 final helpdeskDatabase = FirebaseDatabase.instance.ref('helpdesk');
+
+// Course Material Links Database
+final courseMaterialDatabase = FirebaseDatabase.instance.ref('course');
+final firstSemester = courseMaterialDatabase.child('firstSemester');
+final secondSemester = courseMaterialDatabase.child('secondSemester');
+final thirdSemester = courseMaterialDatabase.child('thirdSemester');
+final fourthSemester = courseMaterialDatabase.child('fourthSemester');
+final fifthSemester = courseMaterialDatabase.child('fifthSemester');
+final sixthSemester = courseMaterialDatabase.child('sixthSemester');
+final seventhSemester = courseMaterialDatabase.child('seventhSemester');
+final eightSemester = courseMaterialDatabase.child('eightSemester');
+
+// Semester Subjects
+Map<String, dynamic> semesterSubjects = {};
