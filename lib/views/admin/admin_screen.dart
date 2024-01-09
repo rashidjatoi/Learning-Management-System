@@ -1,8 +1,9 @@
 import 'package:agriconnect/views/admin/attendance/admin_user_attendance.dart';
-import 'package:agriconnect/views/admin/job/add_job_view.dart';
+import 'package:agriconnect/views/admin/attendance/check_attendance_view.dart';
+import 'package:agriconnect/views/admin/material/add_course_material.dart';
+import 'package:agriconnect/views/admin/material/course_material_view.dart';
 import 'package:agriconnect/views/admin/youtube/add_youtube_video_view.dart';
 import 'package:agriconnect/views/admin/feeback/admin_feedback_view.dart';
-import 'package:agriconnect/views/admin/notes/admin_upload_notes_view.dart';
 import 'package:agriconnect/views/admin/user/list_users_view.dart';
 import 'package:agriconnect/views/admin/notification/upload_notifications.dart';
 import 'package:agriconnect/views/admin/timetable/upload_timetable.dart';
@@ -108,10 +109,10 @@ class AdminScreen extends StatelessWidget {
                 children: [
                   AdminViewButton(
                     ontap: () {
-                      Get.to(() => const AddJobView());
+                      Get.to(() => const CourseMaterial());
                     },
-                    icon: IconlyLight.plus,
-                    iconText: "Post Job",
+                    icon: IconlyLight.document,
+                    iconText: "Course Material",
                   ),
                   AdminViewButton(
                     ontap: () {
@@ -173,7 +174,9 @@ class AdminScreen extends StatelessWidget {
               Row(
                 children: [
                   AdminViewButton(
-                    ontap: () {},
+                    ontap: () {
+                      Get.to(() => const CheckAttendanceView());
+                    },
                     icon: IconlyLight.activity,
                     iconText: "Check Attendance",
                   ),
@@ -201,7 +204,8 @@ class AdminScreen extends StatelessWidget {
                   ),
                   AdminViewButton(
                     ontap: () {
-                      Get.to(() => const AdminNotesUploadView());
+                      // Get.to(() => const AdminNotesUploadView());
+                      Get.to(() => const AddCourseMaterial());
                     },
                     icon: IconlyLight.document,
                     iconText: "Upload Notes",

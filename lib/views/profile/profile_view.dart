@@ -2,10 +2,10 @@ import 'package:agriconnect/constants/colors.dart';
 import 'package:agriconnect/services/auth_services.dart';
 import 'package:agriconnect/services/database_services.dart';
 import 'package:agriconnect/utils/utils.dart';
+import 'package:agriconnect/views/admin/material/course_material_view.dart';
 import 'package:agriconnect/views/admin/youtube/list_youtube_view.dart';
 import 'package:agriconnect/views/auth/signin_view.dart';
 import 'package:agriconnect/views/feedbach/feedback_survey_view.dart';
-import 'package:agriconnect/views/notes_view/notes_view.dart';
 import 'package:agriconnect/views/theme/change_theme_view.dart';
 import 'package:agriconnect/views/project/add_project_view.dart';
 import 'package:agriconnect/views/timetable/time_table_view.dart';
@@ -416,7 +416,8 @@ class ProfileView extends StatelessWidget {
                     btnText: "Mark Attendance",
                     ontap: () {
                       DatabaseServices.uploadAttendance(
-                              email: FirebaseAuth.instance.currentUser!.email,
+                              email: FirebaseAuth.instance.currentUser!.email
+                                  .toString(),
                               id: FirebaseAuth.instance.currentUser!.uid
                                   .toString())
                           .then(
@@ -587,7 +588,7 @@ class ProfileView extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const NotesView(),
+                          builder: (context) => const CourseMaterial(),
                         ),
                       );
                     },

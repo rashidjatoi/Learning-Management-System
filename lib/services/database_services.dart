@@ -113,7 +113,9 @@ class DatabaseServices {
   // Save users data to the database
   static Future uploadAttendance({email, id}) async {
     try {
-      await attendaceDatabase.child(id.toString()).set({
+      final uid = DateTime.now().millisecondsSinceEpoch;
+
+      await attendaceDatabase.child(id.toString()).child(uid.toString()).set({
         "email": email,
         "id": id.toString(),
         "Timestamp": DateTime.now().toString(),

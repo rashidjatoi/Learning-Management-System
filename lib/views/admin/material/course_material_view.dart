@@ -1,95 +1,156 @@
+import 'package:agriconnect/services/services_constants.dart';
+import 'package:agriconnect/views/admin/material/admin_pdf_viewer_view.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../widgets/custom_admin_btn.dart';
-
-class CourseMaterialView extends StatefulWidget {
-  const CourseMaterialView({super.key});
+class CourseMaterial extends StatefulWidget {
+  const CourseMaterial({super.key});
 
   @override
-  State<CourseMaterialView> createState() => _CourseMaterialViewState();
+  State<CourseMaterial> createState() => _CourseMaterialState();
 }
 
-class _CourseMaterialViewState extends State<CourseMaterialView> {
+class _CourseMaterialState extends State<CourseMaterial> {
+  String? selectedDepartment;
+  String? selectedSemester;
+  List<String> selectedSemesterSubjects = [];
+  String? selectedSubject;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // SizeBox
-          const SizedBox(height: 5),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Course Material'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              height: 60,
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black38),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: DropdownButton(
+                  value: selectedSemester,
+                  hint: const Text("Semester"),
+                  isExpanded: true,
+                  underline: const ColoredBox(color: Colors.transparent),
+                  items: semesterSubjects.keys.map((semester) {
+                    return DropdownMenuItem(
+                      value: semester,
+                      child: Text(semester),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedSemester = value.toString();
+                      selectedSubject = '';
+                    });
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            if (selectedSemester != null)
+              Container(
+                width: double.infinity,
+                height: 60,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black38),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: DropdownButton(
+                    value: selectedSubject!.isNotEmpty ? selectedSubject : null,
+                    hint: const Text("Subject"),
+                    isExpanded: true,
+                    underline: const ColoredBox(color: Colors.transparent),
+                    items: (semesterSubjects[selectedSemester!] as List<String>)
+                        .map((subject) {
+                      return DropdownMenuItem(
+                        value: subject,
+                        child: Text(subject),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedSubject = value.toString();
+                      });
+                    },
+                  ),
+                ),
+              ),
+            const SizedBox(height: 20),
+            if (selectedSemester != null && selectedSubject != null)
+              Expanded(
+                child: StreamBuilder(
+                  stream: courseMaterialDatabase
+                      .child(selectedSemester.toString())
+                      .child(selectedSubject.toString())
+                      .onValue,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (!snapshot.hasData ||
+                        snapshot.data == null ||
+                        snapshot.data!.snapshot.value == null) {
+                      return const Center(
+                          child: Text('No materials available'));
+                    } else {
+                      DataSnapshot dataSnapshot = snapshot.data!.snapshot;
+                      Map<dynamic, dynamic> materialsData =
+                          dataSnapshot.value as Map<dynamic, dynamic>;
 
-          Row(
-            children: [
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "1st Semester",
-              ),
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "2nd Semester",
-              ),
-            ],
-          ),
+                      List<dynamic> materials = materialsData.values.toList();
 
-          // SizeBox
-          const SizedBox(height: 5),
+                      return SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: materials.map((material) {
+                            final name = material['name'] ?? '';
+                            final link = material['link'] ?? '';
+                            final courseId = material['id'] ?? '';
 
-          Row(
-            children: [
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "3rd Semester",
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Card(
+                                child: ListTile(
+                                  leading: const Icon(IconlyLight.document),
+                                  title: Text(name),
+                                  trailing: const Icon(IconlyLight.arrow_right),
+                                  onTap: () {
+                                    Get.to(
+                                      () => AdminPdfViewerScreen(
+                                        pdfUrl: link.toString(),
+                                        title: name.toString(),
+                                        courseId: courseId.toString(),
+                                        semester: selectedSemester.toString(),
+                                        subject: selectedSubject.toString(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "4th Semester",
-              ),
-            ],
-          ),
-
-          // SizeBox
-          const SizedBox(height: 5),
-
-          Row(
-            children: [
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "5th Semester",
-              ),
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "6th Semester",
-              ),
-            ],
-          ),
-
-          // SizeBox
-          const SizedBox(height: 5),
-
-          Row(
-            children: [
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "7th Semester",
-              ),
-              AdminViewButton(
-                ontap: () {},
-                icon: IconlyLight.document,
-                iconText: "8th Semester",
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
