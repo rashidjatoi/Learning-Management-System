@@ -3,7 +3,9 @@ import 'package:agriconnect/utils/utils.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdminPdfViewerScreen extends StatefulWidget {
   final String title;
@@ -48,6 +50,18 @@ class _AdminPdfViewerScreenState extends State<AdminPdfViewerScreen> {
     getUserRole();
   }
 
+  Future<void> launchPDF() async {
+    if (await canLaunch(widget.pdfUrl)) {
+      await launch(widget.pdfUrl);
+    } else {
+      Get.snackbar(
+        'Error',
+        'Could not launch PDF',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
   Future deleteCourseMaterial(
       {required String semester,
       required String subject,
@@ -88,7 +102,18 @@ class _AdminPdfViewerScreenState extends State<AdminPdfViewerScreen> {
               ),
             )
           else
-            const Text(''),
+            IconButton(
+              onPressed: () {
+                launchPDF();
+              },
+              icon: const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  IconlyBold.download,
+                  color: Colors.green,
+                ),
+              ),
+            ),
         ],
       ),
       body: document != null
